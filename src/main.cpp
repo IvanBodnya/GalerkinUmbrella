@@ -237,7 +237,9 @@ int main() {
     // Create solver
     HeatSolver solver(mesh);
     
-    // Set initial condition: sine wave
+    // Set initial condition: sine wave,
+    // such that at x = 0 & 1, T = 0 degrees
+    // and at x = 1/2 , T = 1 degrees
     cout << "Setting initial condition: T(x,0) = sin(pi * x)" << endl;
     solver.setInitialConditionFromFunction(sineInitial);
     
@@ -270,6 +272,11 @@ int main() {
     cout << endl;
     cout << "Simulation finished successfully!" << endl;
     cout << "Check the 'results' folder for output files." << endl;
+
+    std::vector<double> x(mesh.getNumPoints());
+    for (int i = 0; i < mesh.getNumPoints(); i++) {
+        x[i] = mesh.getPoint(i);
+    }
 
     return 0;
 }
