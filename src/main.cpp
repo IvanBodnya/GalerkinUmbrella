@@ -8,7 +8,10 @@
 #include <iomanip>
 #include <filesystem>
 
+#include "matplotlibcpp.h"
+
 using namespace std;
+namespace plt = matplotlibcpp;
 
 // ============================================
 // Class to handle the mesh (grid)
@@ -26,7 +29,8 @@ public:
             m_points[i] = i * m_dx;
         }
     }
-    
+
+    vector<double> getAllPoints() const { return m_points; }
     double getPoint(int i) const { return m_points[i]; }
     double getDx() const { return m_dx; }
     int getNumPoints() const { return m_numPoints; }
@@ -109,7 +113,7 @@ public:
             iteration++;
             
             // Save results every 1000 steps
-            if (iteration % 1000 == 0) {
+            if (iteration % 100 == 0) {
                 saveToFile(currentTime);
                 cout << "Time: " << currentTime << ", Max temp: " << getMaxTemperature() << endl;
             }
@@ -118,6 +122,11 @@ public:
         // Save final result
         saveToFile(currentTime);
         cout << "Simulation complete!" << endl;
+    }
+
+    void plot() {
+        plt::plot(m_mesh.getAllPoints(), m_temperature);
+        plt::show();
     }
     
     // Get current temperature at a point
@@ -265,7 +274,10 @@ int main() {
     
     // Run simulation
     solver.solve(thermalDiffusivity, dt, totalTime);
-    
+
+    // Plot results
+    solver.plot();
+
     // Save results
     solver.saveFullHistory();
     
