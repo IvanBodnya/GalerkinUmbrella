@@ -8,7 +8,7 @@
 #include <iomanip>
 #include <filesystem>
 
-#include "matplotlibcpp.h"
+#include "../libs/matplotlibcpp.h"
 
 using namespace std;
 namespace plt = matplotlibcpp;
