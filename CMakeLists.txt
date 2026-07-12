@@ -10,6 +10,8 @@ set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
 add_library(ThermaGrid_Core
     src/core/QuadTreeNode.cpp
+    src/core/test_neighbors.cpp
+    src/core/test_neighbors.h
 )
 
 target_include_directories(ThermaGrid_Core
@@ -28,3 +30,9 @@ add_executable(ThermaGrid_Main
 target_link_libraries(ThermaGrid_Main
     ThermaGrid_Core
 )
+
+# Neighbor test executable
+add_executable(ThermaGrid_Neighbors
+        src/core/test_neighbors.cpp
+)
+target_link_libraries(ThermaGrid_Neighbors ThermaGrid_Core)

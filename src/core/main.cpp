@@ -46,7 +46,7 @@ int main() {
     }
 
     std::cout << "\nTotal nodes: " << root->countNodes() << std::endl;
-    std::cout << "\n✅ All tests passed!" << std::endl;
+    std::cout << "\nAll tests passed!" << std::endl;
 
     return 0;
 }
